@@ -68,9 +68,9 @@ public class BlackJack {
 		
 		while( ++i <= totalPlayers) {
 			
-			System.out.println( "Enter name of player " + i);
+			System.out.println( "\nEnter name of player " + i);
 			name = new String( scanner.next() );
-			System.out.println( "Will " + name + " be a (H)uman or (C)omputer?" );
+			System.out.println( "\nWill " + name + " be a (H)uman or (C)omputer?" );
 			command = scanner.next().charAt(0);
 			switch (command){
 			
@@ -98,6 +98,10 @@ public class BlackJack {
 		while( i <= totalPlayers ){
 			command = 0;
 			done = false;
+
+
+                        System.out.println( "\n****************************************************************************************" );
+                        System.out.println( "****************************************************************************************\n" );
 			System.out.println(players[i].getName() + "'s turn.\n\n");
 			
 			hit( players[i], theDeck);
@@ -114,6 +118,8 @@ public class BlackJack {
 			
 			while (!done && i != 0){
 				
+                        System.out.println( "\n****************************************************************************************" );
+                        System.out.println( "****************************************************************************************\n" );
 				System.out.println( players[i] );
 				System.out.println( "Select an option: (h)it, (s)tay, show (m)y hand, show (d)ealer's hand");
 				command = scanner.next().charAt(0);
@@ -135,9 +141,15 @@ public class BlackJack {
 					done = true;
 					break;
 				case 'm':
+
+                                        System.out.println( "\n****************************************************************************************" );
+                                        System.out.println( "****************************************************************************************\n" );
 					System.out.println( players[i]);
 					break;
 				case 'd':
+
+                                        System.out.println( "\n****************************************************************************************" );
+                                        System.out.println( "****************************************************************************************\n" );
 					System.out.println( players[0] );
 					break;
 				default:
