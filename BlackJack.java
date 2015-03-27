@@ -7,6 +7,9 @@ public class BlackJack {
     private static final short LOSS = 0;
     private static final short TIE = 1;
     private static final short WIN = 2;
+    private static final String lossString = "LOSS";
+    private static final String tieString  = "TIE ";
+    private static final String winString  = "WIN ";
 
     /* Variable Declarations */
     private static Deck theDeck;
@@ -228,9 +231,86 @@ public class BlackJack {
        /*             DETERMINE WINNERS BLOCK               */
        /*---------------------------------------------------*/
 
-       
+       i = 1;
+    
+       while( i <= totalPlayers ){
+
+           currentPlayer = players[i];
+           
+           // if player busted
+           if ( !currentPlayer.getIn() ) {
+
+               currentPlayer.setWin( LOSS );
+           }
+           else { // player hasnt busted
+
+               // if dealer busted
+               if ( !dealer.getIn() )
+                   currentPlayer.setWin( WIN );
+               
+               else { // if dealer hasnt busted
+               
+                   if ( currentPlayer.getHandStrength() > dealer.getHandStrength() )
+                       currentPlayer.setWin( WIN );
+
+                   else if ( currentPlayer.getHandStrength() < dealer.getHandStrength() )
+                       currentPlayer.setWin( LOSS );
+
+                   else 
+                       currentPlayer.setWin( TIE );
+               }
+           }
+           i++;
+       }
+
+       /*---------------------------------------------------*/
+       /*               PRINT RESULTS BLOCK                 */
+       /*---------------------------------------------------*/
 
 
+       System.out.println( "\n****************************************************************************************" );
+       System.out.println( "****************************************************************************************" );
+       System.out.println( "****                                    RESULTS                                     ****" ); 
+       System.out.println( "****************************************************************************************" );
+       System.out.println( "****************************************************************************************" );
+
+ 
+       System.out.println( "****************************************************************************************" ); 
+       System.out.println( "*          NAME            |           STRENGTH           |           RESULT           *" );
+       System.out.println( "***************************|******************************|*****************************" );
+       System.out.print(   "* Dealer                   |              " + dealer.getHandStrength() ); 
+       System.out.println( "              |                            *" );
+       System.out.println( "*--------------------------|------------------------------|----------------------------*" );
+
+       i = 1;
+
+       while( i <= totalPlayers ) {
+
+          currentPlayer = players[i];
+          
+          System.out.print( "* " + currentPlayer.getName() );
+          
+          for ( j = 0; j < 25 - currentPlayer.getName().length(); j++ )
+              System.out.print( ' ' );
+          
+          System.out.print( '|' );
+          System.out.print( "              " + currentPlayer.getHandStrength() );
+          System.out.print( "              |            " );
+
+          if ( currentPlayer.getWin() == LOSS )
+              System.out.print( lossString );
+
+          else if ( currentPlayer.getWin() == TIE)
+              System.out.print( tieString );
+
+          else
+              System.out.print( winString );
+
+          System.out.println( "            *" );
+          i++;
+       }
+
+       System.out.println( "****************************************************************************************" ); 
     }
 
     private static void hit( Player player, Deck theDeck ){
