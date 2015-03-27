@@ -8,6 +8,9 @@ public class Player {
 	private Card[] myHand = new Card[HAND_SIZE];
 	private String name;
 	private boolean real;
+    private int handStrength;
+    private boolean in;
+    private short win;
 	private int marker;
 	private int occupancy;
 	private int playerNumber;
@@ -17,7 +20,33 @@ public class Player {
 		this.name = name;
 		this.real = real;
 		playerNumber = ++players;
+        in = true;
 	}
+
+    public void setWin ( short win ) {
+
+        this.win = win;
+    }
+    
+    public short getWin() {
+
+        return win;
+    }
+   
+    public void setIn( boolean in ) {
+
+        this.in = in;
+    }
+
+    public boolean getIn() {
+
+        return in;
+    }
+
+    public int getHandStrength() {
+
+        return handStrength;
+    }
 	
 	public void push( Card card ){
 		
@@ -67,9 +96,11 @@ public class Player {
 		}
 		
 		if ( acePresent && sum + 10 <= 21)
-			return sum + 10;
+			handStrength = sum + 10;
 		else
-			return sum;
+			handStrength = sum;
+
+        return handStrength;
 	}
 
 
@@ -92,7 +123,7 @@ public class Player {
 			for (int i = 0; i < occupancy; i++)
 				string += myHand[i] + "\n";
 			
-		string += "Strength is: " + this.findHand();
+		string += "Strength is: " + handStrength;
 			
 		return string;
 	}

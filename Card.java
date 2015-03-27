@@ -1,8 +1,12 @@
-
+/*
+ * Filename: Card.java
+ *
+ *
+ */
 public class Card {
 
 	private static final String charValues[] = {"A", "2", "3", "4", "5", "6", "7",
-												"8", "9", "10", "J", "Q", "K"};
+						    "8", "9", "10", "J", "Q", "K"};
 	
 	private int value; // number of card
 	private String suit; // suit of card
